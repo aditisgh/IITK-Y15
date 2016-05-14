@@ -12,19 +12,33 @@ app.controller('MainCtrl', function ($scope,$rootScope)
   function showInfo(data, tabletop) 
   {
     $rootScope.showLoad=false;
-    $.getJSON($rootScope.SETTINGS.nophotolist, function(removePhotoJson){
-	    for (var key in data) 
-	    {
+    for (var key in data) 
+    {
 
-	      console.log(data[key].Roll_No);
-	      if (!data[key].Link_To_Profile_Image)
-		data[key].Link_To_Profile_Image="database/IDpics/"+data[key].Roll_No+".jpg"
+      if (!data[key].Link_To_Profile_Image)
+	data[key].Link_To_Profile_Image="database/IDpics/"+data[key].Roll_No+".jpg"
 
-	      if(removePhotoJson.rollnos.includes(parseInt(data[key].Roll_No))){
-		data[key].Link_To_Profile_Image=""
-	      }
+    }
+    //remove relevant attributes
+    //removes attributes according to roll nos in hidelist
+    $.getJSON($rootScope.SETTINGS.hidelist, function(removeJson){
+	    var dataFinal = [];
+	    for(var key in data){
+		    var roll = parseInt(data[key].Roll_No);
+		    var newItem = {};
+		    for(var attr in data[key]){
+			    if(attr in removeJson && removeJson[attr].includes(roll)){
+				    newItem[attr] = "";
+			    }
+			    else{
+				    newItem[attr] = data[key][attr];
+			    }
+		    }
+		    dataFinal.push(newItem);
 	    }
-	    $rootScope.studentData=data;
+	    
+
+	    $rootScope.studentData=dataFinal;
 	    $scope.$apply();
     });
   }

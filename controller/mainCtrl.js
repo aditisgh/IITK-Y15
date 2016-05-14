@@ -12,13 +12,21 @@ app.controller('MainCtrl', function ($scope,$rootScope)
   function showInfo(data, tabletop) 
   {
     $rootScope.showLoad=false;
-    for (var key in data) 
-    {
-      if (!data[key].Link_To_Profile_Image)
-        data[key].Link_To_Profile_Image="database/IDpics/"+data[key].Roll_No+".jpg"
-    }
-    $rootScope.studentData=data;
-    $scope.$apply();
+    $.getJSON($rootScope.SETTINGS.nophotolist, function(removePhotoJson){
+	    for (var key in data) 
+	    {
+
+	      console.log(data[key].Roll_No);
+	      if (!data[key].Link_To_Profile_Image)
+		data[key].Link_To_Profile_Image="database/IDpics/"+data[key].Roll_No+".jpg"
+
+	      if(removePhotoJson.rollnos.includes(parseInt(data[key].Roll_No))){
+		data[key].Link_To_Profile_Image=""
+	      }
+	    }
+	    $rootScope.studentData=data;
+	    $scope.$apply();
+    });
   }
   $scope.initSpreadSheet = function()
   {

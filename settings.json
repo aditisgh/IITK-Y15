@@ -13,5 +13,6 @@
 	}, {
 		"name": "Siddhant Manocha",
 		"email": "siddhantmanocha1994@gmail.com"
-	}]
+	}],
+	"nophotolist": "database/nophoto.json"
 }

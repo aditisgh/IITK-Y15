@@ -6,7 +6,7 @@
 	"about": "The whereabouts of the Y12 batch of IIT Kanpur. Inspired by (www.cs.cmu.edu/~mahim/class2001/). In case of any queries or suggestions, contact us.",
 	"sortEntriesBy":"Name",
 	"orderDescending":false,
-	"searchInKeys": ["Name", "Position", "Organization", "Location", "History_and_brief_bio"],
+	"searchInKeys": ["Name", "Position", "Organization", "Location", "History_and_brief_bio","Department"],
 	"contacts": [{
 		"name": "Akshay Aggarwal",
 		"email": "aks.agg94@gmail.com"

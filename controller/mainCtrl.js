@@ -3,9 +3,6 @@
 app.controller('MainCtrl', function ($scope,$rootScope) 
 {
   
-  $scope.sortKey = 'Name';
-  $scope.reverse = false;
-
   // http://plnkr.co/edit/Mlca2gXvXNVAXEsNbpCI?p=preview 
   // custom filter on LOCAL_SETTINGS.searchInKeys
   var customFilterFn = function (searchText) {
@@ -41,9 +38,12 @@ app.controller('MainCtrl', function ($scope,$rootScope)
     for (var key in data) 
     {
       if (!data[key].Link_To_Profile_Image)
-        data[key].Link_To_Profile_Image="database/IDpics/"+data[key].Roll_No+".jpg"
+        //data[key].Link_To_Profile_Image=$scope.LOCAL_SETTINGS.defaultProfileImage;
+	data[key].Link_To_Profile_Image="database/IDpics/"+data[key].Roll_No+".jpg"
     }
     $rootScope.studentData=data;
+    $scope.sortKey = $scope.LOCAL_SETTINGS.defaultSortEntriesBy;
+    $scope.reverse = $scope.LOCAL_SETTINGS.defaultOrderDescending;
     $scope.$apply();
   };
 

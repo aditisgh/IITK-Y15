@@ -42,8 +42,8 @@ app.controller('MainCtrl', function ($scope,$rootScope)
 	data[key].Link_To_Profile_Image="database/IDpics/"+data[key].Roll_No+".jpg"
     }
     $rootScope.studentData=data;
-    $scope.sortKey = $scope.LOCAL_SETTINGS.defaultSortEntriesBy;
-    $scope.reverse = $scope.LOCAL_SETTINGS.defaultOrderDescending;
+    $rootScope.sortKey = $scope.LOCAL_SETTINGS.defaultSortEntriesBy;
+    $rootScope.reverse = $scope.LOCAL_SETTINGS.defaultOrderDescending;
     $scope.$apply();
   };
 
@@ -56,8 +56,8 @@ app.controller('MainCtrl', function ($scope,$rootScope)
   };
 
   $scope.sort = function(keyname){
-    $scope.sortKey = keyname;
-    $scope.reverse = !$scope.reverse;
+    $rootScope.sortKey = keyname;
+    $rootScope.reverse = !$scope.reverse;
   }
 
   $scope.loadData = function ()
@@ -69,8 +69,8 @@ app.controller('MainCtrl', function ($scope,$rootScope)
       // in which the controller is loaded. This can be corrected later
       $.getJSON("settings.json", function(json) 
         {
-          $scope.LOCAL_SETTINGS=json;
-          $scope.customFilter=customFilterFn;
+          $rootScope.LOCAL_SETTINGS=json;
+          $rootScope.customFilter=customFilterFn;
           // filter is set now since filter requires the LOCAL_SETTINGS.searchInKeys 
           // to be set
           $scope.$apply();
